@@ -65,6 +65,7 @@ async def check_subscription(callback: CallbackQuery) -> None:
         return
 
     await callback.answer("✅ Access granted!")
+    await db.upsert_user(user.id, user.username, user.first_name)
     await callback.message.delete()
     await callback.message.answer(
         "✅ Thanks for joining! You can now use the bot.", reply_markup=main_menu_keyboard()
